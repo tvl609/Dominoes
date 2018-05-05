@@ -1,7 +1,5 @@
 package model;
 
-import java.util.Comparator;
-
 public class Domino implements Comparable<Object>{
 	private int[] end;
 	public boolean flip = false;

@@ -1,6 +1,5 @@
 package model;
 
-import java.util.ArrayList;
 import model.exceptions.DuplicateDominoException;
 
 public class Boneyard extends BoneCollection {
