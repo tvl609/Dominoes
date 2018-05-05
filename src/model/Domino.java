@@ -2,7 +2,7 @@ package model;
 
 import java.util.Comparator;
 
-public class Domino implements Comparator<Domino>{
+public class Domino implements Comparable<Object>{
 	private int[] end;
 	public boolean flip = false;
 	
@@ -45,17 +45,29 @@ public class Domino implements Comparator<Domino>{
 		return end[0] == end[1];
 	}
 	
+	public boolean equals(Object obj) {
+		if(!(obj instanceof Domino)){
+			return false;
+		}
+		Domino d = (Domino) obj;
+		return (end[0] == d.getEndA() && end[1] == d.getEndB()) ||
+				(end[0] == d.getEndB() && end[1] == d.getEndA());
+	}
+	
 	/**
 	 * Compares two Domino values and returns an integer 
 	 * representing their sort order.
 	 */
-	public int compare(Domino d1, Domino d2) {
-		int[] tmp1 = (d1.getEndA() >= d1.getEndB()) ? 
-				new int[]{d1.getEndA(), d1.getEndB()} :
-				new int[]{d1.getEndB(), d1.getEndA()};
-		int[] tmp2 = (d2.getEndA() >= d2.getEndB()) ? 
-				new int[]{d2.getEndA(), d2.getEndB()} :
-				new int[]{d2.getEndB(), d2.getEndA()};
+	public int compareTo(Object obj) {
+		if(!(obj instanceof Domino))
+			return 0;
+		Domino d = (Domino) obj;
+		int[] tmp1 = (getEndA() >= getEndB()) ? 
+				new int[]{getEndA(), getEndB()} :
+				new int[]{getEndB(), getEndA()};
+		int[] tmp2 = (d.getEndA() >= d.getEndB()) ? 
+				new int[]{d.getEndA(), d.getEndB()} :
+				new int[]{d.getEndB(), d.getEndA()};
 		//greater than conditions: return 1
 		if (tmp1[0] > tmp2[0] || (tmp1[0] == tmp2[0] && tmp1[1] > tmp2[1]))
 			return 1;
@@ -72,6 +84,4 @@ public class Domino implements Comparator<Domino>{
 	public String toString() {
 		return "[" + getEndA() + "|" + getEndB() + "]";
 	}
-
-
 }
