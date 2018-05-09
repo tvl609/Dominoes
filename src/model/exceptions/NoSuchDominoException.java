@@ -7,18 +7,18 @@ package model.exceptions;
  */
 
 @SuppressWarnings("serial")
-public class DuplicateDominoException extends Exception {	
+public class NoSuchDominoException extends Exception {	
 	
 	/**
 	* Constructs an Duplicate Domino message.
 	* @param message A string literal displaying an duplicate domino exception
 	*/
-	public DuplicateDominoException(String message){
+	public NoSuchDominoException(String message){
 		super(message);
 	}
 	
-	public DuplicateDominoException() {
-		this("Domino already exists");
+	public NoSuchDominoException() {
+		this("No such domino exists");
 	}
 	
 }

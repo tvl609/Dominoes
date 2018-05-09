@@ -1,18 +1,45 @@
 package model;
 
+/**
+ * 
+ * @author Shane Bogard
+ * 
+ */
+
 import model.exceptions.DuplicateDominoException;
 
 public class Boneyard extends BoneCollection {
 
-	public Boneyard() {
+	private int maxSuitSz;
+	
+	/**
+	 * Constructs a new Boneyard object with a specified max 
+	 * suit size.
+	 * @param maxSuitSz Integer representing the max suit size
+	 */
+	public Boneyard(int maxSuitSz) {
 		super();
-		for(int i = 6; i >= 0; i--) {
+		this.maxSuitSz = maxSuitSz;
+		for(int i = maxSuitSz; i >= 0; i--) {
 			for(int j = i; j >= 0; j--) {
 				boneCollection.add(new Domino(i, j));
 			}
 		}
 	}
 	
+	/**
+	 * Constructs a new Boneyard object. Default max suit
+	 * size is 6.
+	 */
+	public Boneyard() {
+		this(6);
+	}
+	/**
+	 * Adds a Domino object to this Boneyard if the Domino
+	 * does not currently exist in this Boneyard.
+	 * @param d Domino object
+	 * @throws DuplicateDominoException Exception
+	 */
 	public void addBone(Domino d) throws DuplicateDominoException {
 		if(boneCollection.contains(d)) {
 			throw new DuplicateDominoException("Domino " + d.toString() 
@@ -20,15 +47,17 @@ public class Boneyard extends BoneCollection {
 		}else {
 			boneCollection.add(d);
 		}
-		
 	}
 	
+	
+	/**
+	 * Returns a string literal representation of this Boneyard object.
+	 */
 	public String toString() {
 		String result = "";
-		int suit = 6;
 		for(Domino d: boneCollection) {
-			if(d.getEndA() != suit && d.getEndB() != suit) {
-				suit = (d.getEndA() >= d.getEndB()) ? d.getEndA() : d.getEndB();
+			if(d.getEndA() != maxSuitSz && d.getEndB() != maxSuitSz) {
+				maxSuitSz = (d.getEndA() >= d.getEndB()) ? d.getEndA() : d.getEndB();
 				result += "\n";
 			}
 			result += d.toString();

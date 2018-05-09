@@ -1,5 +1,9 @@
 package model.tests;
 
+/**
+ * @author Shane Bogard
+ */
+
 import model.Domino;
 
 public class TestDomino {

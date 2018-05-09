@@ -1,9 +1,23 @@
 package model;
 
+/**
+ * 
+ * @author Shane Bogard
+ *
+ */
+
 public class Domino implements Comparable<Object>{
-	private int[] end;
-	public boolean flip = false;
 	
+	/** The highest permitted Domino end value */
+	private final int maxSuitSz = 18;
+	
+	/** An integer array representing the ends of the Domino*/
+	private int[] end;
+	
+	/** Determines if the ends are have been "flipped" */
+	public boolean flip;
+	
+		
 	/**
 	 * Constructs a new Domino object consisting of 
 	 * two integer values ranging from 0 to 6.
@@ -12,8 +26,9 @@ public class Domino implements Comparable<Object>{
 	 */
 	public Domino(int endA, int endB) {
 		end = new int[2];
-		end[0] = (endA < 0) ? 0 : (endA > 6) ? 6 : endA;
-		end[1] = (endB < 0) ? 0 : (endA > 6) ? 6 : endB;
+		end[0] = (endA < 0) ? 0 : (endA > maxSuitSz) ? maxSuitSz : endA;
+		end[1] = (endB < 0) ? 0 : (endA > maxSuitSz) ? maxSuitSz : endB;
+		flip = (end[0] >= end[1]);
 	}
 	
 	/**
